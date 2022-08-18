@@ -1,5 +1,16 @@
 import './../css/admin.css';
-
 import ExcursionsAPI from './ExcursionsAPI';
+import RenderExcursion from './RenderExcursion';
 
-console.log('admin');
+const loadExcursions = () => {
+    const excursions = new ExcursionsAPI();
+    excursions
+        .downloadExcursions()
+        .then(data => {
+            const render = new RenderExcursion()
+            render.displayExcursions(data);
+        }
+        );
+};
+
+loadExcursions()
