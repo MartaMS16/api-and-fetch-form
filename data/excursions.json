@@ -1,4 +1,33 @@
 {
-    "excursions": [],
-    "orders": []
+  "excursions": [
+    {
+      "title": "Kraków",
+      "description": "Opis wycieczki.",
+      "priceForAdult": "100",
+      "priceForChild": "50",
+      "id": 1
+    },
+    {
+      "title": "Gdańsk",
+      "description": "Opis wycieczki.",
+      "priceForAdult": "150",
+      "priceForChild": "75",
+      "id": 2
+    },
+    {
+      "title": "Warszawa",
+      "description": "Opis wycieczki.",
+      "priceForAdult": "160",
+      "priceForChild": "80",
+      "id": 3
+    },
+    {
+      "title": "Wrocław",
+      "description": "Opis wycieczki.",
+      "priceForAdult": "140",
+      "priceForChild": "70",
+      "id": 4
+    }
+  ],
+  "orders": []
 }
