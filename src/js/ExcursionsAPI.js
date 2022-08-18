@@ -15,13 +15,13 @@ class ExcursionsAPI {
             .catch(error => console.error(error));
     };
 
-    handleSubmit = () => {
-        const title = document.querySelector('input[name="name"]').value;
-        const description = document.querySelector('textarea').value;
-        const adultPrice = document.querySelector('input[name="adult"]').value;
-        const childPrice = document.querySelector('input[name="child"]').value;
+    handleSubmit = (container, callback, id) => {
+        const title = container.querySelector('input[name="name"]').value;
+        const description = container.querySelector('textarea').value;
+        const adultPrice = container.querySelector('input[name="adult"]').value;
+        const childPrice = container.querySelector('input[name="child"]').value;
 
-        return this.addNewExcursion(this.excursionsUrl, title, description, adultPrice, childPrice);
+        return callback(this.excursionsUrl, title, description, adultPrice, childPrice, id);
     };
 
     addNewExcursion = (url, title, description, priceForAdult, priceForChild) => {
@@ -33,13 +33,24 @@ class ExcursionsAPI {
                 priceForAdult,
                 priceForChild
             }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
         }).then(response => {
             if (response.ok) {
                 return response.json();
             };
+        });
+    };
+
+    updateExcursion = (url, title, description, priceForAdult, priceForChild, id) => {
+        return fetch(`${url}/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                title,
+                description,
+                priceForAdult,
+                priceForChild
+            }),
+            headers: { 'Content-Type': 'application/json' },
         });
     };
 };

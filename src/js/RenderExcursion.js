@@ -19,8 +19,9 @@ class RenderExcursion {
                 const excursionsForm = liEl.querySelector('.excursions__form');
                 const excursionsField = excursionsForm.querySelectorAll('.excursions__field');
                 const [adult, child] = excursionsField;
-                const priceForAdult = adult.querySelector('strong')
-                const priceForChild = child.querySelector('strong')
+                const priceForAdult = adult.querySelector('strong');
+                const priceForChild = child.querySelector('strong');
+                liEl.dataset.id = excursion.id;
                 liTitle.innerText = excursion.title;
                 liDescription.innerText = excursion.description;
                 priceForAdult.innerText = excursion.priceForAdult + ' ';
