@@ -2,6 +2,12 @@ import './../css/client.css';
 import ExcursionsAPI from './ExcursionsAPI';
 import RenderExcursion from './RenderExcursion';
 
+document.addEventListener('DOMContentLoaded', init);
+
+function init(){
+    loadExcursions();
+};
+
 const loadExcursions = () => {
     const excursions = new ExcursionsAPI();
     excursions
@@ -12,5 +18,3 @@ const loadExcursions = () => {
         }
         );
 };
-
-loadExcursions()

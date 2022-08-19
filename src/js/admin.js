@@ -12,6 +12,7 @@ function init() {
     addExcursion();
     editExcursion();
     saveChanges();
+    deleteElement();
 };
 
 const loadExcursions = () => {
@@ -90,8 +91,26 @@ const saveChanges = () => {
                 const targetId = targetParent.dataset.id;
 
                 excursions.handleSubmit(targetParent, excursions.updateExcursion, targetId)
-                    .then(loadExcursions)
-                    .then(cleanForm)
+                    .then(loadExcursions);
+            };
+        }
+    );
+};
+
+const deleteElement = () => {
+    excursionElement.addEventListener(
+        'click',
+        (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const target = e.target.parentElement.parentElement;
+            const deleteButton = target.querySelector('.excursions__field-input--remove');
+            const targetParent = target.parentElement;
+            if (e.target === deleteButton) {
+                const targetId = targetParent.dataset.id;
+                const container = null;
+                excursions.handleSubmit(container, excursions.deleteExcursion, targetId)
+                    .then(loadExcursions);
             };
         }
     );

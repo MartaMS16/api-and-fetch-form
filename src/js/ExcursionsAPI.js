@@ -16,12 +16,14 @@ class ExcursionsAPI {
     };
 
     handleSubmit = (container, callback, id) => {
-        const title = container.querySelector('input[name="name"]').value;
-        const description = container.querySelector('textarea').value;
-        const adultPrice = container.querySelector('input[name="adult"]').value;
-        const childPrice = container.querySelector('input[name="child"]').value;
-
-        return callback(this.excursionsUrl, title, description, adultPrice, childPrice, id);
+        if (container !== null) {
+            const title = container.querySelector('input[name="name"]').value;
+            const description = container.querySelector('textarea').value;
+            const adultPrice = container.querySelector('input[name="adult"]').value;
+            const childPrice = container.querySelector('input[name="child"]').value;
+            return callback(this.excursionsUrl, title, description, adultPrice, childPrice, id);
+        };
+        return callback(this.excursionsUrl, id);
     };
 
     addNewExcursion = (url, title, description, priceForAdult, priceForChild) => {
@@ -51,6 +53,12 @@ class ExcursionsAPI {
                 priceForChild
             }),
             headers: { 'Content-Type': 'application/json' },
+        });
+    };
+
+    deleteExcursion = (url, id) => {
+        return fetch(`${url}/${id}`, {
+            method: 'DELETE',
         });
     };
 };
