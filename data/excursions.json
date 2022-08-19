@@ -8,13 +8,6 @@
       "id": 3
     },
     {
-      "title": "Kraków",
-      "description": "Opis wycieczki.",
-      "priceForAdult": "100",
-      "priceForChild": "50",
-      "id": 6
-    },
-    {
       "title": "Wrocław",
       "description": "Opis wycieczki.",
       "priceForAdult": "140",
@@ -25,37 +18,16 @@
       "title": "Gdańsk",
       "description": "Opis wycieczki.",
       "priceForAdult": "150",
-      "priceForChild": "70",
+      "priceForChild": "75",
       "id": 8
-    }
-  ],
-  "orders": [
+    },
     {
       "title": "Kraków",
-      "priceForAdult": "100 ",
-      "priceForChild": "50 ",
-      "numberOfAdults": "2",
-      "numberOfChildren": "1",
-      "totalPrice": 250,
-      "id": 1
-    },
-    {
-      "title": "Warszawa",
-      "priceForAdult": "160 ",
-      "priceForChild": "80 ",
-      "numberOfAdults": "2",
-      "numberOfChildren": "1",
-      "totalPrice": 400,
-      "id": 2
-    },
-    {
-      "title": "Wrocław",
-      "priceForAdult": "140 ",
-      "priceForChild": "70 ",
-      "numberOfAdults": "2",
-      "numberOfChildren": "1",
-      "totalPrice": 350,
-      "id": 3
+      "description": "Opis wycieczki.",
+      "priceForAdult": "120",
+      "priceForChild": "60",
+      "id": 9
     }
-  ]
+  ],
+  "orders": []
 }

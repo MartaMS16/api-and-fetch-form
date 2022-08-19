@@ -21,6 +21,7 @@ function init() {
             .then(data => renderBasket(basket, data))
             .catch(error => console.error(error));
     };
+    deleteBasketElement();
 };
 
 const addToBasket = () => {
@@ -41,16 +42,14 @@ const addToBasket = () => {
                 const totalPrice = Number(childrenPrice) * childrenNumber.value + Number(adultsPrice) * adultsNumber.value;
                 excursions
                     .addExcursionToBasket(title, adultsPrice, childrenPrice, adultsNumber.value, childrenNumber.value, totalPrice)
-                    .catch(error => console.error(error))
-                    .then(form.cleanForm(target, adultsNumber, childrenNumber));
-
-                setTimeout(function () {
-                    cleanBasket(basket);
-                    excursions
-                        .downloadOrders()
-                        .then(data => renderBasket(basket, data))
-
-                }, 0)
+                    .then(form.cleanForm(target, adultsNumber, childrenNumber))
+                    .then(() => {
+                        cleanBasket(basket);
+                        excursions
+                            .downloadOrders()
+                            .then(data => renderBasket(basket, data))
+                    })
+                    .catch(error => console.error(error));
             };
         }
     );
@@ -67,6 +66,7 @@ function renderBasket(container, orders) {
             const basketItemSummaryTotalPrice = basketItem.querySelector('.summary__total-price');
             const basketTotalPrice = document.querySelector('.order__total-price-value');
 
+            basketItem.dataset.id = order.id;
             basketItemName.innerText = order.title;
             basketItemSummaryPrices.innerText = `dorośli: ${order.numberOfAdults} x ${order.priceForAdult} PLN, dzieci: ${order.numberOfChildren} x ${order.priceForChild} PLN`;
             totalBasketPrice = totalBasketPrice + Number(order.totalPrice);
@@ -82,7 +82,32 @@ function cleanBasket(basket) {
         if (basket.lastChild) {
             while (basket.lastChild && basket.lastChild.className != 'summary__item summary__item--prototype') {
                 basket.removeChild(basket.lastChild);
+                const basketTotalPrice = document.querySelector('.order__total-price-value');
+                basketTotalPrice.innerText = `0 PLN`;
             };
         };
     };
+};
+
+function deleteBasketElement() {
+    basket.addEventListener(
+        'click',
+        (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const target = e.target.parentElement.parentElement;
+            const deleteButton = target.querySelector('.summary__btn-remove');
+            if (e.target === deleteButton) {
+                const targetId = target.dataset.id;
+                excursions.handleSubmitOrders(excursions.deleteElement, targetId)
+                    .then(() => {
+                        cleanBasket(basket);
+                        excursions
+                            .downloadOrders()
+                            .then(data => renderBasket(basket, data))
+                    })
+                    .catch(error => console.error(error));
+            };
+        }
+    );
 };

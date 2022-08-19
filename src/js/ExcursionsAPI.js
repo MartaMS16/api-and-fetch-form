@@ -25,7 +25,7 @@ class ExcursionsAPI {
             .catch(error => console.error(error));
     };
 
-    handleSubmit = (container, callback, id) => {
+    handleSubmitExcursions = (container, callback, id) => {
         if (container !== null) {
             const title = container.querySelector('input[name="name"]').value;
             const description = container.querySelector('textarea').value;
@@ -34,6 +34,10 @@ class ExcursionsAPI {
             return callback(this.excursionsUrl, title, description, adultPrice, childPrice, id);
         };
         return callback(this.excursionsUrl, id);
+    };
+
+    handleSubmitOrders = (callback, id) => {
+        return callback(this.ordersUrl, id);
     };
 
     addNewExcursion = (url, title, description, priceForAdult, priceForChild) => {
@@ -66,12 +70,12 @@ class ExcursionsAPI {
         });
     };
 
-    deleteExcursion = (url, id) => {
+    deleteElement = (url, id) => {
         return fetch(`${url}/${id}`, {
             method: 'DELETE',
         });
     };
-
+    
     addExcursionToBasket = (title, priceForAdult, priceForChild, numberOfAdults, numberOfChildren, totalPrice) => {
         return fetch(this.ordersUrl, {
             method: 'POST',

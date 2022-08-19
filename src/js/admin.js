@@ -14,7 +14,7 @@ function init() {
     addExcursion();
     editExcursion();
     saveChanges();
-    deleteElement();
+    deleteExcursion();
 };
 
 const addExcursion = () => {
@@ -28,7 +28,7 @@ const addExcursion = () => {
         'click',
         (e) => {
             e.preventDefault();
-            excursions.handleSubmit(container, excursions.addNewExcursion)
+            excursions.handleSubmitExcursions(container, excursions.addNewExcursion)
                 .then(render.loadExcursions)
                 .then(form.cleanForm(container, adultPrice, childPrice))
         }
@@ -75,14 +75,14 @@ const saveChanges = () => {
             if (e.target === editButton && editButton.value === "zapisz") {
                 const targetId = targetParent.dataset.id;
 
-                excursions.handleSubmit(targetParent, excursions.updateExcursion, targetId)
+                excursions.handleSubmitExcursions(targetParent, excursions.updateExcursion, targetId)
                     .then(render.loadExcursions);
             };
         }
     );
 };
 
-const deleteElement = () => {
+const deleteExcursion = () => {
     excursionElement.addEventListener(
         'click',
         (e) => {
@@ -94,7 +94,7 @@ const deleteElement = () => {
             if (e.target === deleteButton) {
                 const targetId = targetParent.dataset.id;
                 const container = null;
-                excursions.handleSubmit(container, excursions.deleteExcursion, targetId)
+                excursions.handleSubmitExcursions(container, excursions.deleteElement, targetId)
                     .then(render.loadExcursions);
             };
         }
