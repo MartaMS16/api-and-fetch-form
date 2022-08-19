@@ -4,16 +4,16 @@ class RenderExcursion {
         this.prototype = document.querySelector('.excursions__item--prototype');
     };
 
-    cloneExcursion() {
-        const liEl = this.prototype.cloneNode(true);
-        liEl.classList.remove('excursions__item--prototype');
-        return liEl;
+    clonePrototype(prototype, container) {
+        const element = prototype.cloneNode(true);
+        element.classList.remove(`${container}__item--prototype`);
+        return element;
     };
 
     displayExcursions(excursions) {
         if (excursions) {
             excursions.forEach(excursion => {
-                const liEl = this.cloneExcursion();
+                const liEl = this.clonePrototype(this.prototype, 'excursions');
                 const liTitle = liEl.querySelector('.excursions__title');
                 const liDescription = liEl.querySelector('.excursions__description');
                 const excursionsForm = liEl.querySelector('.excursions__form');

@@ -15,6 +15,16 @@ class ExcursionsAPI {
             .catch(error => console.error(error));
     };
 
+    downloadOrders() {
+        return fetch(this.ordersUrl)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                };
+            })
+            .catch(error => console.error(error));
+    };
+
     handleSubmit = (container, callback, id) => {
         if (container !== null) {
             const title = container.querySelector('input[name="name"]').value;
@@ -59,6 +69,25 @@ class ExcursionsAPI {
     deleteExcursion = (url, id) => {
         return fetch(`${url}/${id}`, {
             method: 'DELETE',
+        });
+    };
+
+    addExcursionToBasket = (title, priceForAdult, priceForChild, numberOfAdults, numberOfChildren, totalPrice) => {
+        return fetch(this.ordersUrl, {
+            method: 'POST',
+            body: JSON.stringify({
+                title,
+                priceForAdult,
+                priceForChild,
+                numberOfAdults,
+                numberOfChildren,
+                totalPrice
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            };
         });
     };
 };

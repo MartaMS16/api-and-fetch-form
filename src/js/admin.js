@@ -1,53 +1,38 @@
 import './../css/admin.css';
 import ExcursionsAPI from './ExcursionsAPI';
-import RenderExcursion from './RenderExcursion';
+import Render from './Render';
+import CleanForm from './CleanForm';
 
 const excursions = new ExcursionsAPI();
 const excursionElement = document.querySelector('.excursions');
+const render = new Render();
 
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    loadExcursions();
+    render.loadExcursions();
     addExcursion();
     editExcursion();
     saveChanges();
     deleteElement();
 };
 
-const loadExcursions = () => {
-    const render = new RenderExcursion()
-    render.cleanExcursionsContainer();
-    excursions
-        .downloadExcursions()
-        .then(data => render.displayExcursions(data));
-};
-
 const addExcursion = () => {
     const submitButton = document.querySelector('.order__field-submit');
     const container = document.querySelector('.form');
+    const adultPrice = document.querySelector('input[name="adult"]');
+    const childPrice = document.querySelector('input[name="child"]');
+    const form = new CleanForm();
 
     submitButton.addEventListener(
         'click',
         (e) => {
             e.preventDefault();
             excursions.handleSubmit(container, excursions.addNewExcursion)
-                .then(loadExcursions)
-                .then(cleanForm)
+                .then(render.loadExcursions)
+                .then(form.cleanForm(container, adultPrice, childPrice))
         }
     );
-};
-
-function cleanForm() {
-    const title = document.querySelector('input[name="name"]');
-    const description = document.querySelector('textarea');
-    const adultPrice = document.querySelector('input[name="adult"]');
-    const childPrice = document.querySelector('input[name="child"]');
-
-    title.value = '';
-    description.value = '';
-    adultPrice.value = '';
-    childPrice.value = '';
 };
 
 const editExcursion = () => {
@@ -91,7 +76,7 @@ const saveChanges = () => {
                 const targetId = targetParent.dataset.id;
 
                 excursions.handleSubmit(targetParent, excursions.updateExcursion, targetId)
-                    .then(loadExcursions);
+                    .then(render.loadExcursions);
             };
         }
     );
@@ -110,7 +95,7 @@ const deleteElement = () => {
                 const targetId = targetParent.dataset.id;
                 const container = null;
                 excursions.handleSubmit(container, excursions.deleteExcursion, targetId)
-                    .then(loadExcursions);
+                    .then(render.loadExcursions);
             };
         }
     );
