@@ -1,7 +1,4 @@
 class CleanForm {
-    constructor() {
-    };
-
     cleanForm(container, adultEl, childEl) {
         const title = container.querySelector('input[name="name"]');
         const description = container.querySelector('textarea');

@@ -75,17 +75,16 @@ class ExcursionsAPI {
             method: 'DELETE',
         });
     };
-    
-    addExcursionToBasket = (title, priceForAdult, priceForChild, numberOfAdults, numberOfChildren, totalPrice) => {
+
+    addExcursionToOrders = (orderTitle, orderTotalPrice, orderDetails, customerName, customerEmail) => {
         return fetch(this.ordersUrl, {
             method: 'POST',
             body: JSON.stringify({
-                title,
-                priceForAdult,
-                priceForChild,
-                numberOfAdults,
-                numberOfChildren,
-                totalPrice
+                orderTitle,
+                orderTotalPrice,
+                orderDetails,
+                customerName,
+                customerEmail
             }),
             headers: { 'Content-Type': 'application/json' },
         }).then(response => {

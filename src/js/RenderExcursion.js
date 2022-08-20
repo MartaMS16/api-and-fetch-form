@@ -1,3 +1,7 @@
+import Validation from "./Validation";
+
+const validation = new Validation();
+
 class RenderExcursion {
     constructor() {
         this.container = document.querySelector('.panel__excursions');
@@ -21,6 +25,7 @@ class RenderExcursion {
                 const [adult, child] = excursionsField;
                 const priceForAdult = adult.querySelector('strong');
                 const priceForChild = child.querySelector('strong');
+                validation.renderErrorMessages(excursionsForm);
                 liEl.dataset.id = excursion.id;
                 liTitle.innerText = excursion.title;
                 liDescription.innerText = excursion.description;

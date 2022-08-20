@@ -29,5 +29,14 @@
       "id": 9
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "orderTitle": "Wrocław",
+      "orderTotalPrice": "350 PLN",
+      "orderDetails": "dorośli: 2 x 280 PLN, dzieci: 1 x 70 PLN",
+      "customerName": "Marta Stelmach",
+      "customerEmail": "marta.ms1961@gmail.com",
+      "id": 1
+    }
+  ]
 }

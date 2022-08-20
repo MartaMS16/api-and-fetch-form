@@ -4,8 +4,8 @@ import Render from './Render';
 import CleanForm from './CleanForm';
 
 const excursions = new ExcursionsAPI();
-const excursionElement = document.querySelector('.excursions');
 const render = new Render();
+const excursionElement = document.querySelector('.excursions');
 
 document.addEventListener('DOMContentLoaded', init);
 
