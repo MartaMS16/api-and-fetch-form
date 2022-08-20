@@ -20,6 +20,26 @@ class Validation {
         };
     };
 
+    adminPanelValidation(container){
+        const name = container.querySelector('input[name="name"]');
+        const description = container.querySelector('textarea');
+        const priceForAdult = container.querySelector('input[name="adult"]').value;
+        const priceForChild = container.querySelector('input[name="child"]').value;
+        
+        if (name.value === '') {
+            this.createErrorMessage(container, 'Nie wypełniono pola "Nazwa"!');
+        };
+        if (description.value === '') {
+            this.createErrorMessage(container, 'Nie wypełniono pola "Opis"!');
+        };
+        if (Number(priceForAdult) === 0 || Number(priceForAdult) < 0) {
+            this.createErrorMessage(container, 'Nieprawidłowe dane w polu "Cena dorosły"!');
+        };
+        if (Number(priceForChild) === 0 || Number(priceForChild) < 0) {
+            this.createErrorMessage(container, 'Nieprawidłowe dane w polu "cena dziecko"!');
+        };
+    };
+
     validateNumbersOfParticipants(container) {
         const numberOfAdults = Number(container.querySelector('input[name=adults]').value);
         const numberOfChildren = Number(container.querySelector('input[name=children]').value);
@@ -34,9 +54,9 @@ class Validation {
 
     createErrorMessage(form, message) {
         const errors = form.querySelector('.errors');
-        const errorEmptyNameField = document.createElement('li');
-        errorEmptyNameField.innerText = message;
-        errors.appendChild(errorEmptyNameField);
+        const errorMessage = document.createElement('li');
+        errorMessage.innerText = message;
+        errors.appendChild(errorMessage);
     };
 
     renderErrorMessages(container) {

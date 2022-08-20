@@ -1,13 +1,10 @@
 import './../css/client.css';
 import ExcursionsAPI from './ExcursionsAPI';
-import RenderExcursion from './RenderExcursion';
-import CleanForm from './CleanForm';
 import Render from './Render';
 import Validation from './Validation';
 
 const excursions = new ExcursionsAPI();
 const render = new Render();
-const renderExcursions = new RenderExcursion();
 const validation = new Validation();
 const excursionElement = document.querySelector('.excursions');
 const basket = document.querySelector('.summary');

@@ -2,15 +2,20 @@ import './../css/admin.css';
 import ExcursionsAPI from './ExcursionsAPI';
 import Render from './Render';
 import CleanForm from './CleanForm';
+import Validation from './Validation';
 
 const excursions = new ExcursionsAPI();
 const render = new Render();
+const validation = new Validation();
+const form = new CleanForm();
 const excursionElement = document.querySelector('.excursions');
+const formContainer = document.querySelector('.form');
 
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     render.loadExcursions();
+    validation.renderErrorMessages(formContainer);
     addExcursion();
     editExcursion();
     saveChanges();
@@ -19,18 +24,21 @@ function init() {
 
 const addExcursion = () => {
     const submitButton = document.querySelector('.order__field-submit');
-    const container = document.querySelector('.form');
     const adultPrice = document.querySelector('input[name="adult"]');
     const childPrice = document.querySelector('input[name="child"]');
-    const form = new CleanForm();
 
     submitButton.addEventListener(
         'click',
         (e) => {
             e.preventDefault();
-            excursions.handleSubmitExcursions(container, excursions.addNewExcursion)
-                .then(render.loadExcursions)
-                .then(form.cleanForm(container, adultPrice, childPrice))
+            const errors = formContainer.querySelector('.errors');
+            validation.clearErrorMessages(errors);
+            validation.adminPanelValidation(formContainer);
+            if (errors.children.length === 0) {
+                excursions.handleSubmitExcursions(formContainer, excursions.addNewExcursion)
+                    .then(render.loadExcursions)
+                    .then(form.cleanForm(formContainer, adultPrice, childPrice))
+            };
         }
     );
 };
