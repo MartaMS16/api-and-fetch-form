@@ -1,14 +1,17 @@
 import './../css/client.css';
+import './../css/client_tablet.css';
+import './../css/client_mobile.css';
 import ExcursionsAPI from './ExcursionsAPI';
 import Render from './Render';
 import Validation from './Validation';
+import RenderExcursion from './RenderExcursion';
 
 const excursionsAPI = new ExcursionsAPI();
 const render = new Render();
 const validation = new Validation();
+const renderExcursions = new RenderExcursion();
 const date = new Date();
 const excursionElement = document.querySelector('.excursions');
-const basket = document.querySelector('.summary');
 const orderPanel = document.querySelector('.panel__order ');
 
 document.addEventListener('DOMContentLoaded', init);
@@ -59,9 +62,7 @@ function sendOrder() {
 function renderBasket(container) {
     const basket = document.querySelector('.summary');
     const basketItemPrototype = document.querySelector('.summary__item--prototype');
-    const basketItem = basketItemPrototype.cloneNode(true);
-    basketItem.classList.remove('summary__item--prototype');
-    basketItem.setAttribute('id', Math.floor(Math.random() * 101));
+    const basketItem =  renderExcursions.clonePrototype(basketItemPrototype, 'summary');
     const basketItemName = basketItem.querySelector('.summary__name');
     const basketItemSummaryTotalPrice = basketItem.querySelector('.summary__total-price');
     const basketItemSummaryPrices = basketItem.querySelector('.summary__prices');
@@ -72,14 +73,11 @@ function renderBasket(container) {
     const totalPriceForAdults = numberOfAdults * priceForAdults;
     const totalPriceForChildren = numberOfChildren * priceForChildren;
     const totalPrice = totalPriceForAdults + totalPriceForChildren;
-
-    if (numberOfAdults === '') {
-        numberOfAdults = 0;
-    };
-    if (numberOfChildren === '') {
-        numberOfChildren = 0;
-    };
-
+    
+    if (numberOfAdults === '') { numberOfAdults = 0 };
+    if (numberOfChildren === '') { numberOfChildren = 0 };
+    
+    basketItem.setAttribute('id', Math.floor(Math.random() * 1001));
     basketItemName.innerText = container.previousElementSibling.firstElementChild.innerText;
     basketItemSummaryTotalPrice.innerText = `${totalPrice} PLN`;
     basketItemSummaryPrices.innerText = `dorośli: ${numberOfAdults} x ${priceForAdults} PLN, dzieci: ${numberOfChildren} x ${priceForChildren} PLN`;
@@ -142,6 +140,7 @@ function cleanBasket(basket) {
 };
 
 function deleteBasketElement() {
+    const basket = document.querySelector('.summary');
     basket.addEventListener(
         'click',
         function (e) {

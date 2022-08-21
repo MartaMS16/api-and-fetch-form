@@ -5,7 +5,7 @@ const validation = new Validation();
 class RenderExcursion {
     constructor() {
         this.container = document.querySelector('.panel__excursions');
-        this.prototype = document.querySelector('.excursions__item--prototype');
+        this.prototypeEl = document.querySelector('.excursions__item--prototype');
     };
 
     clonePrototype(prototype, container) {
@@ -17,7 +17,7 @@ class RenderExcursion {
     displayExcursions(excursions) {
         if (excursions) {
             excursions.forEach(excursion => {
-                const liEl = this.clonePrototype(this.prototype, 'excursions');
+                const liEl = this.clonePrototype(this.prototypeEl, 'excursions');
                 const liTitle = liEl.querySelector('.excursions__title');
                 const liDescription = liEl.querySelector('.excursions__description');
                 const excursionsForm = liEl.querySelector('.excursions__form');

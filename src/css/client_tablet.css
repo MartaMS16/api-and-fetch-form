@@ -1,0 +1,58 @@
+@media screen and (max-width: 1023px) {
+    .panel {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .panel__excursions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-radius: 0;
+        width: auto;
+    }
+
+    .excursions__item {
+        max-width: calc(100% - 22px);
+        width: auto;
+    }
+
+    .excursions__field-input.excursions__field-input--submit {
+        margin-bottom: 0;
+    }
+
+    .panel__form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "order summary";
+        width: auto;
+        border-radius: 0;
+    }
+
+    .order, .summary {
+        border-bottom: 1px solid #bbb;
+        padding-bottom: 15px;
+        margin-bottom: 0;
+        width: auto;
+    }
+
+    .order {
+        padding: 0 15px;
+        grid-area: order;
+    }
+
+    .summary {
+        grid-area: summary;
+    }
+
+    @media screen and (max-width: 880px) {
+        .order, .summary {
+            padding: 15px;
+        }
+
+        .order, .summary {
+            justify-self: center;
+            width: 100%;
+        }
+    }
+}

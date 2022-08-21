@@ -26,10 +26,6 @@ class ExcursionsAPI {
         return callback(this.excursionsUrl, id);
     };
 
-    // handleOrders = (callback, id, customerName, customerEmail, dateOfOrder, timeOfOrder, excursions) => {
-    //     return callback(`${this.ordersUrl}/${id}/excursions`, customerName, customerEmail, dateOfOrder, timeOfOrder, excursions);
-    // };
-
     handleSubmitOrders = (callback, id) => {
         return callback(this.ordersUrl, id);
     };

@@ -2,28 +2,28 @@
   "excursions": [
     {
       "title": "Warszawa",
-      "description": "Opis wycieczki.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis harum quibusdam praesentium ad cupiditate? Eum cupiditate repudiandae praesentium, voluptatibus dolor provident perspiciatis veritatis dolores ad. Dolor expedita nostrum debitis sequi!",
       "priceForAdult": "160",
       "priceForChild": "80",
       "id": 3
     },
     {
       "title": "Wrocław",
-      "description": "Opis wycieczki.",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia ex eveniet quam repudiandae repellendus cupiditate ab tenetur error eius! Maiores reprehenderit incidunt cum necessitatibus voluptatibus consequatur nisi maxime reiciendis impedit!",
       "priceForAdult": "140",
       "priceForChild": "70",
       "id": 7
     },
     {
       "title": "Gdańsk",
-      "description": "Opis wycieczki.",
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum sapiente ad fugiat cumque expedita. Perspiciatis sapiente quam animi tempora, ipsum consequuntur omnis doloribus perferendis velit, quis nostrum explicabo excepturi blanditiis.",
       "priceForAdult": "150",
       "priceForChild": "75",
       "id": 8
     },
     {
       "title": "Kraków",
-      "description": "Opis wycieczki.",
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime inventore, pariatur illo omnis quas perspiciatis nisi neque perferendis voluptatum deserunt autem cupiditate aperiam ipsa nulla voluptates, nemo architecto veniam. Voluptatum.",
       "priceForAdult": "120",
       "priceForChild": "60",
       "id": 9
