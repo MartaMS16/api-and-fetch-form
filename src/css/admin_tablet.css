@@ -1,0 +1,37 @@
+@media screen and (max-width: 1023px) {
+    .panel {
+        flex-direction: column-reverse;
+    }
+
+    .panel__excursions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-radius: 0;
+        width: auto;
+    }
+
+    .excursions__item {
+        max-width: calc(100% - 22px);
+        width: auto;
+    }
+
+    .excursions__field-input.excursions__field-input--submit {
+        margin-bottom: 0;
+    }
+
+    .form__section {
+        width: auto;
+    }
+
+    .form__field{
+        width: 350px;
+    }
+
+    .order__form__field{
+        max-width: 350px;
+    }
+
+    .order__field-input.order__field-submit{
+        width: 350px;
+    }
+}

@@ -1,4 +1,6 @@
 import './../css/admin.css';
+import './../css/admin_tablet.css';
+import './../css/admin_mobile.css';
 import ExcursionsAPI from './ExcursionsAPI';
 import Render from './Render';
 import CleanForm from './CleanForm';

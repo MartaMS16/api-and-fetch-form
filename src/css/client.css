@@ -84,6 +84,9 @@ input[type=number]:hover::after {
 }
 
 .panel__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #34495e;
     color: #ecf0f1;
     padding: 20px;
@@ -92,6 +95,9 @@ input[type=number]:hover::after {
 }
 
 .order {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
     border-bottom: 1px solid #bbb;
     margin-bottom: 20px;
     padding-bottom: 15px;
@@ -108,6 +114,7 @@ input[type=number]:hover::after {
 .order__total-price {
     font-size: 1.5rem;
     font-weight: 500;
+    margin: 0 auto 10px;
 }
 
 .order__field {

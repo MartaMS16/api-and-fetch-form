@@ -25,6 +25,7 @@
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "order summary";
+        align-items: inherit;
         width: auto;
         border-radius: 0;
     }
@@ -45,12 +46,15 @@
         grid-area: summary;
     }
 
+    .errors {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
     @media screen and (max-width: 880px) {
         .order, .summary {
             padding: 15px;
-        }
-
-        .order, .summary {
             justify-self: center;
             width: 100%;
         }
