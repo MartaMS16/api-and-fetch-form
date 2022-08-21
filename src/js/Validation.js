@@ -20,12 +20,12 @@ class Validation {
         };
     };
 
-    adminPanelValidation(container){
+    adminPanelValidation(container) {
         const name = container.querySelector('input[name="name"]');
         const description = container.querySelector('textarea');
         const priceForAdult = container.querySelector('input[name="adult"]').value;
         const priceForChild = container.querySelector('input[name="child"]').value;
-        
+
         if (name.value === '') {
             this.createErrorMessage(container, 'Nie wypełniono pola "Nazwa"!');
         };
@@ -44,10 +44,10 @@ class Validation {
         const numberOfAdults = Number(container.querySelector('input[name=adults]').value);
         const numberOfChildren = Number(container.querySelector('input[name=children]').value);
 
-        if (numberOfAdults === 0 || numberOfAdults < 0) {
+        if (numberOfAdults < 0 || isNaN(Number(numberOfAdults))) {
             this.createErrorMessage(container, 'Liczba osób dorosłych jest nieprawidłowa!');
         };
-        if (numberOfChildren === 0 || numberOfChildren < 0) {
+        if (numberOfChildren < 0 || isNaN(Number(numberOfChildren))) {
             this.createErrorMessage(container, 'Liczba dzieci jest nieprawidłowa!');
         };
     };

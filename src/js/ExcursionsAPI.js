@@ -15,16 +15,6 @@ class ExcursionsAPI {
             .catch(error => console.error(error));
     };
 
-    downloadOrders() {
-        return fetch(this.ordersUrl)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                };
-            })
-            .catch(error => console.error(error));
-    };
-
     handleSubmitExcursions = (container, callback, id) => {
         if (container !== null) {
             const title = container.querySelector('input[name="name"]').value;
@@ -35,6 +25,10 @@ class ExcursionsAPI {
         };
         return callback(this.excursionsUrl, id);
     };
+
+    // handleOrders = (callback, id, customerName, customerEmail, dateOfOrder, timeOfOrder, excursions) => {
+    //     return callback(`${this.ordersUrl}/${id}/excursions`, customerName, customerEmail, dateOfOrder, timeOfOrder, excursions);
+    // };
 
     handleSubmitOrders = (callback, id) => {
         return callback(this.ordersUrl, id);
@@ -76,15 +70,29 @@ class ExcursionsAPI {
         });
     };
 
-    addExcursionToOrders = (orderTitle, orderTotalPrice, orderDetails, customerName, customerEmail) => {
+    addOrder = (customerName, customerEmail, dateOfOrder, timeOfOrder, excursions) => {
         return fetch(this.ordersUrl, {
             method: 'POST',
             body: JSON.stringify({
-                orderTitle,
-                orderTotalPrice,
-                orderDetails,
                 customerName,
-                customerEmail
+                customerEmail,
+                dateOfOrder,
+                timeOfOrder,
+                excursions
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            };
+        });
+    };
+
+    addExcursionToOrders = (order, id) => {
+        return fetch(`${this.ordersUrl}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                order
             }),
             headers: { 'Content-Type': 'application/json' },
         }).then(response => {

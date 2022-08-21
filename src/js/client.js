@@ -3,9 +3,10 @@ import ExcursionsAPI from './ExcursionsAPI';
 import Render from './Render';
 import Validation from './Validation';
 
-const excursions = new ExcursionsAPI();
+const excursionsAPI = new ExcursionsAPI();
 const render = new Render();
 const validation = new Validation();
+const date = new Date();
 const excursionElement = document.querySelector('.excursions');
 const basket = document.querySelector('.summary');
 const orderPanel = document.querySelector('.panel__order ');
@@ -14,33 +15,44 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     render.loadExcursions();
-    cleanBasket(basket);
     validation.renderErrorMessages(orderPanel);
-    if (excursions) {
-        excursions
-            .downloadOrders()
-            .catch(error => console.error(error));
-    };
     deleteBasketElement();
     addToBasket();
     order();
 };
 
 function sendOrder() {
+    const basket = document.querySelector('.summary');
     if (basket) {
-        Array.from(basket.children).forEach(function (order) {
-            if (order.className !== 'summary__item summary__item--prototype') {
-                const orderTitle = order.querySelector('.summary__name').innerText;
-                const orderTotalPrice = order.querySelector('.summary__total-price').innerText;
-                const orderDetails = order.querySelector('.summary__prices').innerText;
-                const customerName = document.querySelector('input[name="name"]').value;
-                const customerEmail = document.querySelector('input[name="email"]').value;
-                excursions
-                    .addExcursionToOrders(orderTitle, orderTotalPrice, orderDetails, customerName, customerEmail)
-                    .then(cleanBasket(basket))
-                    .catch(error => console.error(error));
-            };
-        });
+        const customerName = document.querySelector('input[name="name"]').value;
+        const customerEmail = document.querySelector('input[name="email"]').value;
+        const dateOfOrder = date.toLocaleDateString();
+        const timeOfOrder = date.toLocaleTimeString();
+        const basketContent = Array.from(basket.children);
+        const orders = [];
+
+        excursionsAPI
+            .addOrder(customerName, customerEmail, dateOfOrder, timeOfOrder)
+            .then((data) => {
+                basketContent.forEach(function (item) {
+                    if (item.className !== 'summary__item summary__item--prototype') {
+                        const orderTitle = item.querySelector('.summary__name').innerText;
+                        const orderTotalPrice = item.querySelector('.summary__total-price').innerText;
+                        const orderDetails = item.querySelector('.summary__prices').innerText;
+                        const order = {
+                            orderTitle: orderTitle,
+                            orderTotalPrice: orderTotalPrice,
+                            orderDetails: orderDetails
+                        };
+                        orders.push(order);
+                    };
+                    excursionsAPI
+                        .addExcursionToOrders(orders, data.id)
+                        .catch(error => console.error(error));
+                });
+            })
+            .then(cleanBasket(basket))
+            .catch(error => console.error(error));
     };
 };
 
@@ -70,7 +82,7 @@ function renderBasket(container) {
 
     basketItemName.innerText = container.previousElementSibling.firstElementChild.innerText;
     basketItemSummaryTotalPrice.innerText = `${totalPrice} PLN`;
-    basketItemSummaryPrices.innerText = `dorośli: ${numberOfAdults} x ${totalPriceForAdults} PLN, dzieci: ${numberOfChildren} x ${totalPriceForChildren} PLN`;
+    basketItemSummaryPrices.innerText = `dorośli: ${numberOfAdults} x ${priceForAdults} PLN, dzieci: ${numberOfChildren} x ${priceForChildren} PLN`;
 
     basket.appendChild(basketItem);
 };
@@ -167,9 +179,8 @@ function order() {
                 alert('Nie wybrano wycieczek!');
             } else if (errors.children.length < 1 && totalPriceItem.innerText !== '0 PLN') {
                 sendOrder();
-                alert(`Dziękujemy za złożenie zamówienia o wartości ${totalPrice}. Szczegóły zamówienia zostały wysłane na adres e-mail: ${email}.`);
                 clearOrderForm(target);
-                cleanBasket(basket);
+                alert(`Dziękujemy za złożenie zamówienia o wartości ${totalPrice}. Szczegóły zamówienia zostały wysłane na adres e-mail: ${email}.`);
             } else if (totalPriceItem.innerText === '0 PLN') {
                 alert('Wartość wybranych wycieczek wynosi 0 PLN!');
             } else {

@@ -31,12 +31,23 @@
   ],
   "orders": [
     {
-      "orderTitle": "Wrocław",
-      "orderTotalPrice": "350 PLN",
-      "orderDetails": "dorośli: 2 x 280 PLN, dzieci: 1 x 70 PLN",
       "customerName": "Marta Stelmach",
       "customerEmail": "marta.ms1961@gmail.com",
-      "id": 1
+      "dateOfOrder": "21.08.2022",
+      "timeOfOrder": "14:51:51",
+      "id": 1,
+      "order": [
+        {
+          "orderTitle": "Wrocław",
+          "orderTotalPrice": "350 PLN",
+          "orderDetails": "dorośli: 2 x 140  PLN, dzieci: 1 x 70  PLN"
+        },
+        {
+          "orderTitle": "Kraków",
+          "orderTotalPrice": "300 PLN",
+          "orderDetails": "dorośli: 2 x 120  PLN, dzieci: 1 x 60  PLN"
+        }
+      ]
     }
   ]
 }
